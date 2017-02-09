@@ -46,10 +46,13 @@
   });
 
 
+  $app->get('/delete', function() use ($app){
 
+    CD::delete();
 
+      return $app['twig']->render('form.html.twig', array('cds'=> $_SESSION['cd']));
+  });
 
-
-        return $app;
+    return $app;
 
 ?>

@@ -40,7 +40,7 @@ class CD
         return $_SESSION['cd'];
     }
 
-    function delete(){
+    static function delete(){
         $_SESSION['cd'] = array();
     }
 
