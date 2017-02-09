@@ -35,19 +35,14 @@
       $search_input = '/.*' .$_POST['search']. '.*/i';
       var_dump($search_input);
       $tempArray = array();
-    //   $return = preg_match('/'.$search_input.'/i',"Ben Folds");
-    //   echo "preg match result is: ";
-    //   var_dump($return);
 
       foreach($_SESSION['cd'] as $cd){
         if ( (preg_match($search_input, $cd->getArtist())) == 1) {
           array_push($tempArray,$cd);
         }
       }
-      echo "Inside of Temp Array";
-      var_dump($tempArray);
 
-      return "String";
+    return $app['twig']->render('search-result.html.twig', array('cds'=> $tempArray));
   });
 
 

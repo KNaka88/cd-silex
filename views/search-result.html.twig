@@ -1,0 +1,32 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Your CD Database</title>
+    </head>
+    <body>
+
+        <h3>Your results:</h3>
+
+
+        <ul>
+        {% set previous = false %}
+        {% for cd in cds %}
+            {% if previous != cd %}
+                {% if not loop.first %}
+                    </ul>
+                {% endif %}
+
+                <li>Artist: {{ cd.getArtist() }}</li>
+                <ul>
+
+                <li>Title: {{cd.getTitle()}}</li>
+            {% else %}
+                <li>Title: {{cd.getTitle()}}</li>
+            {% endif %}
+            {% set previous = cd %}
+        {% endfor %}
+        </ul>
+
+
+    </body>
+</html>
