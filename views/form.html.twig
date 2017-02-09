@@ -28,14 +28,23 @@
 
             <h3>Your Collection:</h3>
             <ul>
-                {% if cds is not empty %}
-                    {% for cd in cds %}
-                    <li>Title: {{ cd.getTitle() }}</li>
-                    <li>Artist: {{ cd.getArtist() }}</li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
+            {% set previous = false %}
+            {% for cd in cds %}
+                {% if previous|capitalize != cd.getArtist()|capitalize %}
+                    {% if not loop.first %}
+                        </ul>
+                    {% endif %}
 
+                    <li>Artist: {{ cd.getArtist() }}</li>
+                    <ul>
+
+                    <li>Title: {{cd.getTitle()}}</li>
+                {% else %}
+                    <li>Title: {{cd.getTitle()}}</li>
+                {% endif %}
+                {% set previous = cd.getArtist() %}
+            {% endfor %}
+            </ul>
 
             <a href='/delete'>
             <button class="btn btn-danger">Delete</button>

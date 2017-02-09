@@ -26,6 +26,7 @@
 
     $new_cd = new CD($_POST['artist'], $_POST['title']);
     $new_cd->save();
+    asort($_SESSION['cd']);
       return $app['twig']->render('form.html.twig', array('cds'=> $_SESSION['cd']));
 
   });
@@ -37,7 +38,7 @@
       $tempArray = array();
 
       foreach($_SESSION['cd'] as $cd){
-        if ( (preg_match($search_input, $cd->getArtist())) == 1) {
+        if ( (preg_match($search_input, $cd->getArtist()))) {
           array_push($tempArray,$cd);
         }
       }
