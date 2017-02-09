@@ -13,5 +13,22 @@
             <input type='text' name='title'>
             <button type='submit'>Submit Album</button>
         </form>
+        <h3>Search your Collection: </h3>
+        <form action='/search-result' method='post'>
+            <label for='search'>Artist Name:</label>
+            <input type='text' name='search'>
+            <button type='submit'>Search</button>
+        </form>
+
+        <h3>Your Collection:</h3>
+        <ul>
+            {% if cds is not empty %}
+                {% for cd in cds %}
+                <li>Title: {{ cd.getTitle() }}</li>
+                <li>Artist: {{ cd.getArtist() }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
     </body>
 </html>

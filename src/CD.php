@@ -35,4 +35,13 @@ class CD
         array_push($_SESSION['cd'], $this);
     }
 
+    static function getAll()
+    {
+        return $_SESSION['cd'];
+    }
+
+    function delete(){
+        $_SESSION['cd'] = array();
+    }
+
 }

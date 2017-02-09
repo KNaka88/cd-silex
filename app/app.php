@@ -19,15 +19,37 @@
 
   $app->get('/', function() use ($app){
 
-      return $app['twig']->render('form.html.twig');
+      return $app['twig']->render('form.html.twig', array('cds'=> $_SESSION['cd']));
   });
 
   $app->post('/', function() use ($app){
 
     $new_cd = new CD($_POST['artist'], $_POST['title']);
-    var_dump($new_cd);
-      return $app['twig']->render('form.html.twig');
+    $new_cd->save();
+      return $app['twig']->render('form.html.twig', array('cds'=> $_SESSION['cd']));
+
   });
+
+
+  $app->post('/search-result', function() use ($app){
+      $search_input = '/.*' .$_POST['search']. '.*/i';
+      var_dump($search_input);
+      $tempArray = array();
+    //   $return = preg_match('/'.$search_input.'/i',"Ben Folds");
+    //   echo "preg match result is: ";
+    //   var_dump($return);
+
+      foreach($_SESSION['cd'] as $cd){
+        if ( (preg_match($search_input, $cd->getArtist())) == 1) {
+          array_push($tempArray,$cd);
+        }
+      }
+      echo "Inside of Temp Array";
+      var_dump($tempArray);
+
+      return "String";
+  });
+
 
 
 
