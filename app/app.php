@@ -2,6 +2,7 @@
   date_default_timezone_set('America/Los_Angeles');
   require_once __DIR__.'/../vendor/autoload.php';
   require_once __DIR__.'/../src/CD.php';
+  require_once __DIR__.'/../web/upload.php';
 
 
   $app = new Silex\Application();
@@ -45,6 +46,16 @@
 
     return $app['twig']->render('search-result.html.twig', array('cds'=> $tempArray));
   });
+
+
+
+  $app->post('/upload', function() use ($app){
+
+    uploadImage();
+
+    return $app['twig']->render('form.html.twig', array('cds'=> $_SESSION['cd']));
+  });
+
 
 
   $app->get('/delete', function() use ($app){
